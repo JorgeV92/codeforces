@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+
+void solve() {
+    int n;
+    std::cin >> n;
+    std::vector<int> a(n);
+    for (int i = 0 ; i < n; i++) {
+        std::cin >> a[i];
+    }
+    int suf = -1E9;
+    int ans = -1E9;
+    for (int i = 0; i < n; i++) {
+        if (i && (a[i] - a[i-1]) % 2 == 0) {
+            suf = 0;
+        }
+        suf = std::max(suf, 0) + a[i];
+        ans = std::max(ans, suf);
+    }
+    std::cout << ans << "\n";
+}
+
+int main() {
+    std::ios::sync_with_stdio(0); std::cin.tie(0);
+    int tt;
+    std::cin>> tt;
+    while (tt--) {
+        solve();
+    }
+    return 0;
+}
