@@ -1,2 +1,5 @@
 # Ignore compiled binary files
 *.out
+
+review/
+onlineJudge/
