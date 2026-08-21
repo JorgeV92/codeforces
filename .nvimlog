@@ -1,0 +1,8 @@
+WRN 2026-05-31T12:14:17.680 ?.23641    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/2HToyM/nvim.23641.0
+WRN 2026-05-31T12:14:25.280 ?.23681    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/gMQv1V/nvim.23681.0
+WRN 2026-05-31T12:14:35.483 ?.23748    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/cHHPxs/nvim.23748.0
+WRN 2026-05-31T12:14:35.483 ?.23749    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/0D9nhd/nvim.23749.0
+WRN 2026-05-31T12:14:46.888 ?.23819    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/xjmKS0/nvim.23819.0
+WRN 2026-05-31T12:14:46.888 ?.23820    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/ckPSwD/nvim.23820.0
+WRN 2026-05-31T12:14:59.506 ?.23903    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/coEAfR/nvim.23903.0
+WRN 2026-05-31T12:15:03.371 ?.23935    server_start:193: Failed to start server: operation not permitted: /var/folders/kz/7czhxj311gg2slx48mg45cwm0000gn/T/nvim.jorgevelez/o2400g/nvim.23935.0

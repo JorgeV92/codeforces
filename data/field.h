@@ -32,6 +32,7 @@ public:
 	inline explicit operator ui() const { return v; }
 	inline static vector<Field<N>>fact(int t){vector<Field<N>>F(t+1,1);for(int i=2;i<=t;++i){F[i]=F[i-1]*i;}return F;}
 	inline static vector<Field<N>>invfact(int t){vector<Field<N>>F(t+1,1);Field<N> X{1};for(int i=2;i<=t;++i){X=X*i;}F[t]=1/X;for(int i=t-1;i>=2;--i){F[i]=F[i+1]*(i+1);}return F;}
+    inline static Field<N> nCK(int n, int k) { if (k<0||k>n) return 0; auto F = fact(n); auto IF = invfact(n); return F[n] * IF[k] * IF[n-k]; }
 private: ui v;
 };
 template<unsigned int N>istream &operator>>(std::istream&is,Field<N>&f){unsigned int v;is>>v;f=v;return is;}
