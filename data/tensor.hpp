@@ -1,0 +1,49 @@
+#pragma once
+
+#include <array>
+#include <cassert>
+
+template<typename T, int NDIMS> struct tensor_view {
+    static_assert(NDIMS >= 0, "NDIMS must be nonnegative");
+
+protected: 
+    std::array<int, NDIMS> shape;
+    std::array<int, NDIMS> strides;
+    T* data;
+
+    tensor_view(std::array<int, NDIMS> shape_, std::array<int, NDIMS> strides_, T* data) : shape(shape_), strides(strides_), data(data_) {}
+
+public:
+    tensor_view() : shape{0}, strides{0}, data(nullptr) {}
+
+protected:
+    int flatten_index(std::array<int, NDIMS> idx) const {
+        int res = 0;
+        for (int i = 0; i < NDIMS; i++) { res += idx[i] * strides[i]; }
+        return res;
+    }
+    int flatten_index_checked(std::array<int, NDIMS> idx) const {
+        int res= 0;
+        for (int i = 0; i < NDIMS; ++i) {
+            assert(0 <= idx[i] && idx[i] < shape[i]);
+            res += idx[i] * strides[i];
+        }
+        return res;
+    }
+
+public:
+    T& operator[](std::array<int, NDIMS> idx) const {
+        return data[flatten_index(idx)];
+    }
+    T& at(std::array<int, NDIMS> idx) const {
+        return data[flatten_index_checked(idx)];
+    }
+
+    template<int D = NDIMS>
+    typename std::enable_if<(0 < D), tensor_view<T, NDIMS-1>>::type operator[] (int idx) const {
+        std::array<int, NDIMS-1> nshape; std::copy(shape.begin() + 1, shape.end(), nshape.begin());
+        std::array<int, NDIMS-1> nstrides; std::copy(strides.begin()+1, strides.end(), nstrides.begin());
+        T* ndata = data + (strides[0] * idx);
+        return tensor_view<T, NDIMS-1>(nshape, nstrides, ndata);
+    }
+};
