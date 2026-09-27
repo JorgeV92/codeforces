@@ -86,13 +86,13 @@ CartesianTree<int> ct; // max
 int main() {
     std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
     int T;  std::cin >> T;
-    ct.assign(MAXV, 0);
+    cntv.assign(MAXV, 0);
     while (T--) {
 
-        auto travers = [&]() {
-            struct Frame = {int v, state; };
+        auto traverse = [&]() {
+            struct Frame  {int v, state; };
             std::vector<Frame> stk;
-            stk.push_back(ct.root, 0);
+            stk.push_back({ct.root, 0});
             while (!stk.empty()) {
                 int v = stk.back().v, state = stk.back().state;
                 if (state == 0) {
@@ -119,7 +119,22 @@ int main() {
                 }
                 bool okV = ((a[v] & M) == M);
                 if (rightSize > leftSize) {
+                    for (int i = v - 1; i >= l-1; i--) {
+                        if (okV && cntv[M^s[i]] > 0) found = true;
+                        if (i == v-1) cntv[s[v]]++;
+                    }
+                    for (int i = l; i < v; i++) cntv[s[i]]++;
+                } else {
+                    cntv[s[v-1]]--;
+                    cntv[s[l-1]]++;
+                    for (int i = v; i <= r; i++) {
+                        if (okV && cntv[M^s[i]] > 0) found = true;
+                        if (i ==v) cntv[s[v-1]]++;
+                    }
+                    cntv[s[l-1]]--;
+                    for (int i = v; i <= r; i++) cntv[s[i]]++;
                 }
+                stk.pop_back();
             }
         };
 
@@ -128,6 +143,21 @@ int main() {
         s.assign(n+1, 0);
         for (int i = 1; i <= n; ++i) std::cin >> a[i];
         ct.build(a, n);
+
+        auto check = [&](int mask) {
+            M = mask;
+            s[0] = 0;
+            for (int i = 1; i <= n; i++) s[i] = s[i-1] ^ (a[i] & M);
+            found = false;
+            traverse();
+            for (int i = 1; i <= n; ++i) cntv[s[i]] = 0;
+            return found;
+        };
+
+        int ans = 0;
+        for (int b = B-1; b >= 0; b--) 
+            if (check(ans | (1 << b))) ans |= (1 << b);
+        std::cout << ans << '\n';
 
     }
     return 0;
