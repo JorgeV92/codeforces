@@ -1,6 +1,6 @@
 # Ignore compiled binary files
 *.out
-/contest/*/[A-Z]
+**/[A-Z]
 
 review/
 onlineJudge/
